@@ -2,54 +2,63 @@ import React,{useState} from 'react';
 import axios from 'axios';
 
 const AddContact = (props) => {
-    const [form, setForm] = useState({
+  const [form, setForm] = useState({
+    first_name: '',
+    nick_name: '',
+    last_name: '',
+    email: '',
+    phone: ''
+  });
+
+  const [addBtnClicked,setAddBtnClicked] = useState(false);
+  
+  const [btnTxt,setBtnTxt] = useState({submit: 'Add Contact', cancel: 'Cancel'}); //Avoids warning about controlled/uncontrolled state for button text
+
+  const handleChange = (e) => {
+    let name = e.target.name;
+    let val = e.target.value;
+
+    setForm({...form,[name]: val});
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post("http://localhost:9000/api",form)
+        .catch(err=>console.error('error: ',err.message));
+
+    setForm({
       first_name: '',
       nick_name: '',
       last_name: '',
       email: '',
       phone: ''
     });
-    
-    const [btnTxt,setBtnTxt] = useState({submit: 'Add Contact', clear: 'Clear'}); //Avoids warning about controlled/uncontrolled state for button text
-  
-    const handleChange = (e) => {
-      let name = e.target.name;
-      let val = e.target.value;
-  
-      setForm({...form,[name]: val});
-    }
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
 
-      axios.post("http://localhost:9000/api",form)
-          .catch(err=>console.error('error: ',err.message));
-  
-      setForm({
-        first_name: '',
-        nick_name: '',
-        last_name: '',
-        email: '',
-        phone: ''
-      });
+    props.setUpdate(!props.update);
 
-      props.setUpdate(!props.update);
+    setBtnTxt({submit: 'Add Contact', cancel: 'Cancel'}); //Again, just avoids warning for unused var related to previous warning workaround
+  }
 
-      setBtnTxt({submit: 'Add Contact', clear: 'Clear'}); //Again, just avoids warning for unused var related to previous warning workaround
-    }
+  const handleReset = (e) => {
+    e.preventDefault();
 
-    const handleReset = (e) => {
-      e.preventDefault();
+    setForm({
+      first_name: '',
+      nick_name: '',
+      last_name: '',
+      email: '',
+      phone: ''
+    });
 
-      setForm({
-        first_name: '',
-        nick_name: '',
-        last_name: '',
-        email: '',
-        phone: ''
-      });
-    }
-  
+    setAddBtnClicked(false);
+  }
+
+  const handleClick = (e) => {
+    setAddBtnClicked(true);
+  }
+
+  if(addBtnClicked){
     return(
       <form onSubmit={handleSubmit} onReset={handleReset}>
         <label>
@@ -78,9 +87,13 @@ const AddContact = (props) => {
         </label>
         <br/>
         <input type='submit' value={btnTxt.submit}/>
-        <input type='reset' value={btnTxt.clear}/>
+        <input type='reset' value={btnTxt.cancel}/>
       </form>
     );
+  }
+  else{
+    return(<button onClick={handleClick}>Add Contact</button>);
+  }
 }
 
 export default AddContact;
