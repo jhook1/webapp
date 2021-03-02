@@ -1,7 +1,6 @@
 import React,{useEffect} from 'react';
 import axios from 'axios';
 import AddContact from './AddContact';
-import '../views/ListContact.css';
 
 const ListContacts = (props) => {
   const setTable = props.setTable;

@@ -1,4 +1,5 @@
 import './App.css';
+import './views/contacts.css';
 import React,{useState} from 'react';
 import ListContacts from './components/ListContacts';
 import ReadContact from './components/ReadContact';

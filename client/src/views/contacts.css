@@ -1,0 +1,12 @@
+tr:hover{
+    background-color: #0099FF;
+    cursor:pointer;
+}
+
+button{
+    cursor: pointer;
+}
+
+input[type='submit'],input[type='reset']{
+    cursor: pointer;
+}
