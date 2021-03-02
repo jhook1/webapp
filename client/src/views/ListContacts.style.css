@@ -1,0 +1,4 @@
+.selectTable tr:hover{
+    background-color: #FFFF99;
+    cursor:pointer;
+}

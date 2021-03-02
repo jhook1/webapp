@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import axios from 'axios';
 import AddContact from './AddContact';
+import '../views/ListContacts.style.css';
 
 const ListContacts = (props) => {
   const setTable = props.setTable;
@@ -35,7 +36,7 @@ const ListContacts = (props) => {
   },[update,setTable,setSelectedID]);
 
   return ([
-    <table key={'table'}>
+    <table key={'table'} class="selectTable">
       <thead>
         <tr>
           <th>ID</th>
