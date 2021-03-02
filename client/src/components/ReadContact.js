@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import axios from 'axios';
 import DeleteContact from './DeleteContact';
-import UpdateContact from './UpdateContact';
+import PostContact from './PostContact';
 
 const ReadContact = (props) => {
     const setTable = props.setTable;
@@ -53,6 +53,7 @@ const ReadContact = (props) => {
             </thead>
             <tbody>{props.table}</tbody>
         </table>,
+        <br key={'break'}/>,
         <button key={'back'} onClick={handleClick}>Back</button>,
         <DeleteContact
             key={'delete'} 
@@ -61,11 +62,12 @@ const ReadContact = (props) => {
             update={update}
             setUpdate={setUpdate}
         />,
-        <UpdateContact
+        <PostContact
             key={'update'}
             selectedID={selectedID}
             update={update} 
             setUpdate={setUpdate}
+            method={'Update Contact'}
         />
     ]);
 }

@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import axios from 'axios';
-import AddContact from './AddContact';
+import PostContact from './PostContact';
 import '../views/ListContacts.style.css';
 
 const ListContacts = (props) => {
@@ -36,7 +36,7 @@ const ListContacts = (props) => {
   },[update,setTable,setSelectedID]);
 
   return ([
-    <table key={'table'} class="selectTable">
+    <table key={'table'} className="selectTable">
       <thead>
         <tr>
           <th>ID</th>
@@ -46,10 +46,13 @@ const ListContacts = (props) => {
       </thead>
       <tbody>{props.table}</tbody>
     </table>,
-    <AddContact
+    <br key={'break'}/>,
+    <PostContact
       key={'add'}
+      selectedID={props.selectedID}
       update={update} 
       setUpdate={setUpdate}
+      method={'Add Contact'}
     />
   ]);
 }

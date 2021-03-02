@@ -25,6 +25,7 @@ function App() {
           setTable={setTable}
           update={update}
           setUpdate={setUpdate}
+          selectedID={selectedID}
           setSelectedID={setSelectedID}
         />
       }
